@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import ciclo.cuatro.servicio.ventas.model.Venta;
 import ciclo.cuatro.servicio.ventas.repository.VentaRepository;
@@ -20,6 +21,9 @@ public class VentaController {
 
 	@Autowired
 	private VentaRepository repository;
+
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@PostMapping(value = "/agregar")
 	public ResponseEntity<Venta> agregarVenta(@RequestBody Venta venta) {
