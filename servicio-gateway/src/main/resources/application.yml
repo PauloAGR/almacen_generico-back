@@ -1,0 +1,34 @@
+server:
+  port: 8090
+  
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+      - id: SERVICIO-CLIENTES
+        uri: lb://SERVICIO-CLIENTES
+        predicates:
+        - Path=/api/clientes/**
+      - id: SERVICIO-PRODUCTOS
+        uri: lb://SERVICIO-PRODUCTOS
+        predicates:
+        - Path=/api/productos/**
+      - id: SERVICIO-VENTAS
+        uri: lb://SERVICIO-VENTAS
+        predicates:
+        - Path=/api/ventas/**
+      - id: SERVICIO-CONSOLIDACION
+        uri: lb://SERVICIO-CONSOLIDACION
+        predicates:
+        - Path=/api/consolidacion/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
