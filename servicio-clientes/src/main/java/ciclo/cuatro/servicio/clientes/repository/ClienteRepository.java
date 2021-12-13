@@ -8,4 +8,5 @@ import ciclo.cuatro.servicio.clientes.model.Cliente;
 
 public interface ClienteRepository extends MongoRepository<Cliente, String> {
 	Optional<Cliente> findClienteByNombreCompleto(String nombreCompleto);
+	String deleteClienteByCedula(String cedula);
 }
