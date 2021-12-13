@@ -3,7 +3,12 @@ package ciclo.cuatro.servicio.ventas.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +28,7 @@ public class VentaController {
 	private VentaRepository repository;
 
 	@Autowired
-	private RestTemplate restTemplate;
+	public RestTemplate restTemplate;
 
 	@PostMapping(value = "/agregar")
 	public ResponseEntity<Venta> agregarVenta(@RequestBody Venta venta) {
@@ -37,12 +42,12 @@ public class VentaController {
 	}
 
 	@GetMapping(value = "/{cedula_cliente}")
-	public ResponseEntity<List<Venta>> detalleVentasCliente(@PathVariable ("cedula_cliente") String cedulaCliente){
+	public ResponseEntity<List<Venta>> detalleVentasCliente(@PathVariable("cedula_cliente") String cedulaCliente) {
 		return ResponseEntity.ok(repository.findVentasByCedulaCliente(cedulaCliente));
 	}
-	
+
 	@GetMapping(value = "/detalle/{codigo_venta}")
-	public ResponseEntity<Venta> detalleVenta(@PathVariable ("codigo_venta") long codigoVenta){
+	public ResponseEntity<Venta> detalleVenta(@PathVariable("codigo_venta") long codigoVenta) {
 		return ResponseEntity.ok(repository.findVentaByCodigoVenta(codigoVenta));
 	}
 }

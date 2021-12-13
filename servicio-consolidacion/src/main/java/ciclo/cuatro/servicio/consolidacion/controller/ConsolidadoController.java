@@ -22,10 +22,15 @@ public class ConsolidadoController {
 
 	@PostMapping(value = "/agregar")
 	public ResponseEntity<Consolidado> agregarConsolidado(@RequestBody Consolidado consolidado) {
-		double total = consolidado.getTotalVentas()
-				+ repository.findConsolidadoByCiudad(consolidado.getCiudad()).getTotalVentas();
-		consolidado.setTotalVentas(total);
-		return ResponseEntity.ok(repository.save(consolidado));
+		try {
+			Consolidado tmp = repository.findConsolidadoByCiudad(consolidado.getCiudad());
+			consolidado.setTotalVentas(tmp.getTotalVentas() + consolidado.getTotalVentas());
+			repository.deleteById(tmp.get_id());
+		} catch (NullPointerException e) {
+
+		}
+		repository.save(consolidado);
+		return ResponseEntity.ok(consolidado);
 	}
 
 	@GetMapping(value = "/")
