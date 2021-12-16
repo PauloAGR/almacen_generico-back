@@ -41,8 +41,8 @@ public class ProductoController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
-	@DeleteMapping(value = "/eliminar/{codigo_producto}")
-	public ResponseEntity<String> eliminarProducto(@PathVariable("codigo_producto") long codigoProducto) {
+	@DeleteMapping(value = "/eliminar/{codigoProducto}")
+	public ResponseEntity<String> eliminarProducto(@PathVariable("codigoProducto") long codigoProducto) {
 		return ResponseEntity.ok(repository.deleteProductoByCodigoProducto(codigoProducto));
 	}
 
